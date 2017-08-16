@@ -11,22 +11,27 @@
   <h2>Faktura numer {{fvNr}}</h2>
   <form 
     ng-submit="saveDB()">
-    <label for="klient">Klient</label>
-    <select name="" id="" ng-model="klient">
+    <label for="client">Klient</label>
+    <select name="" id="" ng-model="client">
       <option value="Hitler">Hitler</option>
       <option value="Stalin">Stalin</option>
       <option value="Mao">Mao </option>
     </select>
     <div>
       <label>Kwota</label>
-      <input type="number" ng-model="kwota">
+      <input type="number" ng-model="amount">
     </div>
     <input value="zapisz" type="submit" />
   </form>
   <h2>Podsumowanie</h2>
-  <p>Klient {{klient}}</p>
-  <p>Kwota {{kwota}}</p>
-  <p>Kwota brutto {{kwotaBrutto}}</p>
+  <p>Klient {{client}}</p>
+  <p>Kwota {{amount}}</p>
+  <p>Kwota brutto {{amountBrutto}}</p>
+  <div>
+    <ul>
+      <li ng-repeat="fv in fvs.data">{{fv.client }}{{ fv.amount}}</li>
+    </ul>
+  </div>
   <script src="node_modules/angular/angular.js"></script>
   <script src="node_modules/angular-route/angular-route.js"></script>
   <script src="main.js"></script>  

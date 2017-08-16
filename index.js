@@ -22,8 +22,7 @@ app.get('/', function (req, res){
 
 app.post('/api/fvs', function (req, res, next) {
   var fv = new FV ({
-    numer: req.body.username,
-    klient: req.body.klient,
+    client: req.body.client,
     amount: req.body.amount
   })
   fv.save(function (err, post) {
