@@ -1,28 +1,36 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var db = require('./db');
+var bodyParser = require('body-parser');
+var FV = require('./models/fv');
 
+app.use(bodyParser.json());
 app.use(express.static(__dirname));
+
+//zwraca wszystkie fv
+app.get('/api/fvs', function (req, res, next) {
+  FV.find(function (err, fvs) {
+    if (err) {return next (err)}
+    res.json(fvs);
+  })
+})
 
 app.get('/', function (req, res){
   res.sendFile(__dirname + "index.js");
 })
 
-var mongoose = require('mongoose');
-var mongoDB = 'mongodb://kamil:0000@ds145283.mlab.com:45283/faktury';
-mongoose.connect(mongoDB, {useMongoClient: true });
-
-var db = mongoose.connection;
-
-var Schema = mongoose.Schema;
-
-var singleFV = new Schema ({
-  klient: String,
-  numer: Number
-});
-
-db.on('error', console.error.bind(console, 'mongo error'));
-//połącz z db
+app.post('/api/fvs', function (req, res, next) {
+  var fv = new FV ({
+    numer: req.body.username,
+    klient: req.body.klient,
+    amount: req.body.amount
+  })
+  fv.save(function (err, post) {
+    if (err) {return next(err)}
+    res.json(201, fv);
+  })
+})
 
 //wyświetl co jest w bazie
 

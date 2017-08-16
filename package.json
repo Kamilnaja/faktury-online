@@ -11,6 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "angular": "^1.6.5",
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "live-server": "^1.2.0",
     "mongodb": "^2.2.31"
