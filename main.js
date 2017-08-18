@@ -23,10 +23,8 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
 $http.get('http://localhost:3000/api/clients')
   .then(function(clients) {
     $scope.clients = clients
-    console.log(clients);
   })
  
-
   $http.get('http://localhost:3000/api/fvs')
   .then(function (fvs) {
     $scope.fvs = fvs
