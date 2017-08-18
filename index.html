@@ -27,24 +27,11 @@
   <p>Klient {{client}}</p>
   <p>Kwota {{amount}}</p>
   <p>Kwota brutto {{amountBrutto}}</p>
-  <h2>Lista faktur</h2>
   <div>
     <ul>
-      <li ng-repeat="fv in fvs.data">{{fv.client }} {{ fv.amount}} {{fv.number}}</li>
+      <li ng-repeat="fv in fvs.data">{{fv.client }}{{ fv.amount}}</li>
     </ul>
   </div>
-  <h2>Dodaj klienta</h2>
-  <form ng-submit="saveClient()">
-    <div>
-        <label>Client Name</label>
-        <input ng-model="clientName"/>
-    </div>
-    <div>
-        <label>Client NIP</label>
-        <input ng-model="clientNip"/>
-    </div>
-    <input type="submit" />
-  </form>
   <script src="node_modules/angular/angular.js"></script>
   <script src="node_modules/angular-route/angular-route.js"></script>
   <script src="main.js"></script>  
