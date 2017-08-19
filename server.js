@@ -5,10 +5,11 @@ var bodyParser = require('body-parser');
 var FV = require('./models/fv');
 var Client = require('./models/client');
 var app = express();
-var routes = require('./route')(app);
-
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
+var routes = require('./route')(app);
+
+
 
 //zwraca wszystkie fv
 

@@ -1,12 +1,7 @@
 angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http) {
   $scope.amount = 0;
   $scope.client = "";
-  $scope.number = $scope.number++;
   var fvs = [];
-  $scope.calculateBrutto = function () {
-    //zwróć brutto
-  };
-  $scope.amountBrutto = $scope.amount + ($scope.amount * 23 / 100);
 
   $scope.saveFV = function () {
     //save amount, nr kolejny i client do db
@@ -17,7 +12,7 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
       })
         .then(function (fv) {
           //error
-          $scope.fvs.unshift(fv);
+          $scope.fvs.data.unshift(fv);
         })
     }
   };
@@ -31,7 +26,7 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
       })
         .then(function (client) {
           //error
-          $scope.fvs.unshift(client);
+          $scope.clients.data.unshift(client);
           console.log(client);
         })
     } else {
