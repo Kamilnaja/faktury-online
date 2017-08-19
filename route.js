@@ -6,7 +6,8 @@ module.exports = function (app) {
     var fv = new FV({
       client: req.body.client,
       amount: req.body.amount,
-      vat: req.body.vat
+      vat: req.body.vat,
+      fvNumber: req.body.fvNumber
     });
     fv.save(function (err, fv) {
       if (err) { return next(err) }

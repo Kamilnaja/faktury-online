@@ -6,7 +6,8 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
       $http.post('/api/fvs', {
         client: $scope.client,
         amount: $scope.amount,
-        vat: $scope.vat
+        vat: $scope.vat,
+        fvNumber: $scope.fvNumber
       })
         .then(function (fv) {
           //error

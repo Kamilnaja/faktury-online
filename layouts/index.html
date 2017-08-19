@@ -12,9 +12,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <h2>Faktura numer {{fvNr}}</h2>
       <form
           ng-submit="saveFV()">
+        <h2>Wystaw fv</h2>
+        <div>
+          <label for="fv-number">Faktura numer </label>
+          <input
+              type="number"
+              id="fv-number"
+              ng-model="fvNumber">
+        </div>
+
         <div class="form-group">
           <label for="client">Klient</label>
           <select name="" id="client" ng-model="client">
@@ -44,6 +52,7 @@
 
     <div class="col-md-3">
       <h2>Podsumowanie</h2>
+      <p>Number fv {{fvNumber}}</p>
       <p>Klient {{client}}</p>
       <p>Kwota {{amount}} zł</p>
       <p>Stawka vat {{vat }} %</p>
@@ -66,7 +75,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-9">
       <h2>Lista faktur</h2>
       <div>
         <table class="table">
@@ -80,11 +89,19 @@
           <tr ng-repeat="fv in fvs.data">
             <td>{{fv.client }}</td>
             <td>{{ fv.amount}}</td>
-            <td>{{fv.number}}</td>
+            <td>{{fv.fvNumber}}</td>
             <td>{{fv.vat}}</td>
             <td ng-hide="fv.vat === undefined">{{fv.amount + (fv.amount * fv.vat / 100) }}</td>
           </tr>
         </table>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <h2>Lista klientów</h2>
+      <div>
+        <ul>
+          <li ng-repeat="client in clients.data">{{client.name}}</li>
+        </ul>
       </div>
     </div>
   </div>
