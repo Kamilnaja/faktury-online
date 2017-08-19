@@ -4,47 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
   <title>Document</title>
 
 </head>
 <body ng-controller="fvCtrl">
-  <h2>Faktura numer {{fvNr}}</h2>
-  <form 
-    ng-submit="saveFV()">
-    <label for="client">Klient</label>
-    <select name="" id="client" ng-model="client">
-      <option ng-repeat="client in clients.data">{{client.name}}</option>
-    </select>
-    <div>
-      <label>Kwota</label>
-      <input type="number" ng-model="amount">
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>Faktura numer {{fvNr}}</h2>
+      <form
+          ng-submit="saveFV()">
+        <div class="form-group">
+          <label for="client">Klient</label>
+          <select name="" id="client" ng-model="client">
+            <option ng-repeat="client in clients.data">{{client.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="vat">Stawka vat</label>
+          <select
+              name="vat"
+              id="vat"
+              ng-change="setVat()"
+              ng-model="vat"
+          >
+            <option value="23">23%</option>
+            <option value="5">5%</option>
+            <option value="8">8%</option>
+          </select>
+        </div>
+        <div>
+          <label>Kwota</label>
+          <input type="number" ng-model="amount">
+        </div>
+        <input value="zapisz" type="submit"/>
+      </form>
     </div>
-    <input value="zapisz" type="submit" />
-  </form>
-  <h2>Podsumowanie</h2>
-  <p>Klient {{client}}</p>
-  <p>Kwota {{amount}}</p>
-  <p>Kwota brutto {{amountBrutto}}</p>
-  <h2>Lista faktur</h2>
-  <div>
-    <ul>
-      <li ng-repeat="fv in fvs.data">{{fv.client }} {{ fv.amount}} {{fv.number}}</li>
-    </ul>
+
+    <div class="col-md-3">
+      <h2>Podsumowanie</h2>
+      <p>Klient {{client}}</p>
+      <p>Kwota {{amount}} zł</p>
+      <p>Stawka vat {{vat }} %</p>
+      <p ng-hide="vat === undefined">Kwota brutto {{amount + (amount * vat / 100) }}</p>
+
+    </div>
+    <div class="col-md-3">
+      <h2>Dodaj klienta</h2>
+      <form ng-submit="saveClient()">
+        <div>
+          <label>Client Name</label>
+          <input ng-model="name"/>
+        </div>
+        <div>
+          <label>Client NIP</label>
+          <input ng-model="nip"/>
+        </div>
+        <input type="submit"/>
+      </form>
+    </div>
   </div>
-  <h2>Dodaj klienta</h2>
-  <form ng-submit="saveClient()">
-    <div>
-        <label>Client Name</label>
-        <input ng-model="name"/>
+  <div class="row">
+    <div class="col-md-3">
+      <h2>Lista faktur</h2>
+      <div>
+        <ul>
+          <li ng-repeat="fv in fvs.data">{{fv.client }} {{ fv.amount}} {{fv.number}}</li>
+        </ul>
+      </div>
     </div>
-    <div>
-        <label>Client NIP</label>
-        <input ng-model="nip"/>
-    </div>
-    <input type="submit" />
-  </form>
+  </div>
+
+
   <script src="node_modules/angular/angular.js"></script>
   <script src="node_modules/angular-route/angular-route.js"></script>
-  <script src="main.js"></script>  
+  <script src="main.js"></script>
+</div>
 </body>
 </html>

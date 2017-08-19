@@ -1,7 +1,6 @@
 angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http) {
   $scope.amount = 0;
   $scope.client = "";
-  var fvs = [];
 
   $scope.saveFV = function () {
     //save amount, nr kolejny i client do db
