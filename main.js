@@ -20,7 +20,7 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
   $scope.saveClient = function () {
     //save amount, nr kolejny i client do db
     if ($scope.name && $scope.nip) {
-      $http.post('/api/client', {
+      $http.post('/api/clients', {
         nip: $scope.nip,
         name: $scope.name
       })
