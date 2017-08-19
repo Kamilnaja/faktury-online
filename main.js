@@ -12,24 +12,41 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
     //save amount, nr kolejny i client do db
     if ($scope.client && $scope.amount) {
       $http.post('/api/fvs', {
-        number: 10,
         client: $scope.client,
         amount: $scope.amount
       })
-      .then(function(fv){
-        //error
-        $scope.fvs.unshift(fv);
-      })
-  }
+        .then(function (fv) {
+          //error
+          $scope.fvs.unshift(fv);
+        })
+    }
   };
-  
-$http.get('http://localhost:3000/api/clients')
-  .then(function(clients) {
-    $scope.clients = clients
-  });
- 
+
+  $scope.saveClient = function () {
+    //save amount, nr kolejny i client do db
+    if ($scope.name && $scope.nip) {
+      $http.post('/api/client', {
+        nip: $scope.nip,
+        name: $scope.name
+      })
+        .then(function (client) {
+          //error
+          $scope.fvs.unshift(client);
+          console.log(client);
+        })
+    } else {
+      console.log("wpisz dane");
+    }
+  };
+
+
+  $http.get('http://localhost:3000/api/clients')
+    .then(function (clients) {
+      $scope.clients = clients
+    });
+
   $http.get('http://localhost:3000/api/fvs')
-  .then(function(fvs){
-    $scope.fvs = fvs
-  })
+    .then(function (fvs) {
+      $scope.fvs = fvs
+    })
 });
