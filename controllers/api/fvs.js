@@ -5,15 +5,15 @@ var FV = require('../../models/fv');
       if (err) {return next (err)}
       res.json(fvs);
     })
-  })
+  });
   
   app.post('/', function (req, res, next) {
     var fv = new FV ({
       client: req.body.client,
-      amount: req.body.amount,
-    })
-    fv.save(function (err, post) {
+      amount: req.body.amount
+    });
+    fv.save(function (err, fv) {
       if (err) {return next(err)}
       res.json(201, fv);
     })
-  })
+  });

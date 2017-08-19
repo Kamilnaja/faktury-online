@@ -10,7 +10,7 @@
 <body ng-controller="fvCtrl">
   <h2>Faktura numer {{fvNr}}</h2>
   <form 
-    ng-submit="saveDB()">
+    ng-submit="saveFV()">
     <label for="client">Klient</label>
     <select name="" id="" ng-model="client">
       <option ng-repeat="client in clients.data">{{client.clientName}}</option>

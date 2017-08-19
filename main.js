@@ -5,10 +5,10 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
   var fvs = [];
   $scope.calculateBrutto = function () {
     //zwróć brutto
-  }
+  };
   $scope.amountBrutto = $scope.amount + ($scope.amount * 23 / 100);
 
-  $scope.saveDB = function () {
+  $scope.saveFV = function () {
     //save amount, nr kolejny i client do db
     if ($scope.client && $scope.amount) {
       $http.post('/api/fvs', {
@@ -26,12 +26,10 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
 $http.get('http://localhost:3000/api/clients')
   .then(function(clients) {
     $scope.clients = clients
-  })
+  });
  
   $http.get('http://localhost:3000/api/fvs')
   .then(function(fvs){
     $scope.fvs = fvs
-    console.log(fvs);
   })
-})
-//po kliknięciu zapisz - zapisz fv w db
+});

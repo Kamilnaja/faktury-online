@@ -5,15 +5,15 @@ var Client = require('../../models/client');
       if (err) {return next (err)}
       res.json(clients);
     })
-  })
+  });
   
   app.post('/', function (req, res, next) {
     var client = new Client ({
-      clientName: req.body.clientName,
-      clientNip: req.body.clientNip
-    })
-    client.save(function (err, post) {
+      name: req.body.name,
+      nip: req.body.nip
+    });
+    client.save(function (err, client) {
       if (err) {return next(err)}
       res.json(201, client);
     })
-  })
+  });
