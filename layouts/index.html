@@ -47,7 +47,7 @@
       <p>Klient {{client}}</p>
       <p>Kwota {{amount}} zł</p>
       <p>Stawka vat {{vat }} %</p>
-      <p ng-hide="vat === undefined">Kwota brutto {{amount + (amount * vat / 100) }}</p>
+      <p ng-hide="vat === undefined">Kwota brutto {{amount + (amount * vat / 100) }} zł</p>
 
     </div>
     <div class="col-md-3">
@@ -69,9 +69,22 @@
     <div class="col-md-3">
       <h2>Lista faktur</h2>
       <div>
-        <ul>
-          <li ng-repeat="fv in fvs.data">{{fv.client }} {{ fv.amount}} {{fv.number}}</li>
-        </ul>
+        <table class="table">
+          <thead>
+          <th>Klient</th>
+          <th>Kwota Netto</th>
+          <th>Numer FV</th>
+          <th>Stawka VAT</th>
+          <th>Stawka brutto</th>
+          </thead>
+          <tr ng-repeat="fv in fvs.data">
+            <td>{{fv.client }}</td>
+            <td>{{ fv.amount}}</td>
+            <td>{{fv.number}}</td>
+            <td>{{fv.vat}}</td>
+            <td ng-hide="fv.vat === undefined">{{fv.amount + (fv.amount * fv.vat / 100) }}</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

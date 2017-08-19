@@ -1,13 +1,12 @@
 angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http) {
-  $scope.amount = 0;
-  $scope.client = "";
 
   $scope.saveFV = function () {
     //save amount, nr kolejny i client do db
     if ($scope.client && $scope.amount) {
       $http.post('/api/fvs', {
         client: $scope.client,
-        amount: $scope.amount
+        amount: $scope.amount,
+        vat: $scope.vat
       })
         .then(function (fv) {
           //error

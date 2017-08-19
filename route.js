@@ -5,7 +5,8 @@ module.exports = function (app) {
   app.post('/api/fvs', function (req, res, next) {
     var fv = new FV({
       client: req.body.client,
-      amount: req.body.amount
+      amount: req.body.amount,
+      vat: req.body.vat
     });
     fv.save(function (err, fv) {
       if (err) { return next(err) }
