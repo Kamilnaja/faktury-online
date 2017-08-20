@@ -2,20 +2,24 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
   //default value
   $scope.vat = 23;
   $scope.amount = 0;
-  $scope.countBrutto = function () {
 
+  $scope.countBrutto = function () {
     $scope.amountBrutto = $scope.amount + ($scope.amount * $scope.vat /1000 );
   };
   // $scope.brutto = $scope.amount + ($scope.amount * $scope.vat /1000 );
-
+  $scope.setClient = function () {
+    $scope.nip = $scope.client.selected.nip;
+    $scope.name = $scope.client.selected.name;
+  };
   $scope.saveFV = function () {
     //save amount, nr kolejny i client do db
     if ($scope.client && $scope.amount) {
       $http.post('/api/fvs', {
-        client: $scope.client,
+        client: $scope.name,
         amount: $scope.amount,
         vat: $scope.vat,
-        fvNumber: $scope.fvNumber
+        fvNumber: $scope.fvNumber,
+        fvNip: $scope.nip
       })
         .then(function (fv) {
           //error

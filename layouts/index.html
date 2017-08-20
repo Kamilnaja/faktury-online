@@ -28,9 +28,13 @@
 
         <div class="form-group">
           <label for="client">Klient</label>
-          <select name="" id="client" ng-model="client">
-            <option ng-repeat="client in clients.data">{{client.name}}</option>
-          </select>
+          <select
+              name="client"
+              id="client"
+              ng-model="client.selected"
+              ng-options="client.name for client in clients.data"
+              ng-change="setClient()"
+          ></select>
         </div>
         <div class="form-group">
           <label for="vat">Stawka vat</label>
@@ -59,7 +63,8 @@
     <div class="col-md-3">
       <h2>Podsumowanie</h2>
       <p>Number fv {{fvNumber}}</p>
-      <p>Klient {{client}}</p>
+      <p>Klient {{name}}</p>
+      <p>NIP {{nip}}</p>
       <p>Kwota {{amount | currency : "PLN"}}</p>
       <p>Stawka vat {{vat }} %</p>
       <p>Kwota brutto {{amountBrutto | currency : " PLN "}} </p>
@@ -87,13 +92,15 @@
         <table class="table">
           <thead>
           <th>Klient</th>
+          <th>NIP</th>
           <th>Kwota Netto</th>
           <th>Numer FV</th>
           <th>Stawka VAT</th>
-          <th>Stawka brutto</th>
+          <th>Kwota brutto</th>
           </thead>
           <tr ng-repeat="fv in fvs.data">
             <td>{{fv.client }}</td>
+            <td>{{fv.fvNip}}</td>
             <td>{{ fv.amount}}</td>
             <td>{{fv.fvNumber}}</td>
             <td>{{fv.vat}}</td>

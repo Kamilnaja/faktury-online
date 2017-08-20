@@ -7,7 +7,8 @@ module.exports = function (app) {
       client: req.body.client,
       amount: req.body.amount,
       vat: req.body.vat,
-      fvNumber: req.body.fvNumber
+      fvNumber: req.body.fvNumber,
+      fvNip: req.body.fvNip
     });
     fv.save(function (err, fv) {
       if (err) { return next(err) }
