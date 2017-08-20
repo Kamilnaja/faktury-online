@@ -1,4 +1,12 @@
 angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http) {
+  //default value
+  $scope.vat = 23;
+  $scope.amount = 0;
+  $scope.countBrutto = function () {
+
+    $scope.amountBrutto = $scope.amount + ($scope.amount * $scope.vat /1000 );
+  };
+  // $scope.brutto = $scope.amount + ($scope.amount * $scope.vat /1000 );
 
   $scope.saveFV = function () {
     //save amount, nr kolejny i client do db

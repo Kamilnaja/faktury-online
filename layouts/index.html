@@ -8,19 +8,22 @@
   <title>Document</title>
 
 </head>
+
 <body ng-controller="fvCtrl">
 <div class="container">
   <div class="row">
     <div class="col-md-3">
       <form
-          ng-submit="saveFV()">
+          ng-submit="saveFV()"
+      >
         <h2>Wystaw fv</h2>
         <div>
           <label for="fv-number">Faktura numer </label>
           <input
               type="number"
               id="fv-number"
-              ng-model="fvNumber">
+              ng-model="fvNumber"
+          >
         </div>
 
         <div class="form-group">
@@ -34,17 +37,20 @@
           <select
               name="vat"
               id="vat"
-              ng-change="setVat()"
+              ng-change="countBrutto()"
               ng-model="vat"
           >
-            <option value="23">23%</option>
-            <option value="5">5%</option>
-            <option value="8">8%</option>
+            <option value=23>23%</option>
+            <option value=5>5%</option>
+            <option value=8>8%</option>
           </select>
         </div>
         <div>
           <label>Kwota</label>
-          <input type="number" ng-model="amount">
+          <input
+              type="number"
+              ng-model="amount"
+              ng-change="countBrutto()">
         </div>
         <input value="zapisz" type="submit"/>
       </form>
@@ -54,9 +60,9 @@
       <h2>Podsumowanie</h2>
       <p>Number fv {{fvNumber}}</p>
       <p>Klient {{client}}</p>
-      <p>Kwota {{amount}} zł</p>
+      <p>Kwota {{amount | currency : "PLN"}}</p>
       <p>Stawka vat {{vat }} %</p>
-      <p ng-hide="vat === undefined">Kwota brutto {{amount + (amount * vat / 100) }} zł</p>
+      <p>Kwota brutto {{amountBrutto | currency : " PLN "}} </p>
 
     </div>
     <div class="col-md-3">
