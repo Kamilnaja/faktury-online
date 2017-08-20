@@ -40,7 +40,6 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
         addressNr: $scope.addressNr,
         addressCity: $scope.addressCity,
         addressPostal: $scope.addressPostal
-
       })
         .then(function (client) {
           //error

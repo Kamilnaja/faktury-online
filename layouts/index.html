@@ -10,182 +10,235 @@
 </head>
 
 <body ng-controller="fvCtrl">
+
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <form
-          ng-submit="saveFV()"
-      >
-        <h2>Wystaw fv</h2>
-        <div>
-          <label for="fv-number">Faktura numer </label>
-          <input
-              type="number"
-              id="fv-number"
-              ng-model="fvNumber"
-              min="0"
-          >
-        </div>
-
-        <div class="form-group">
-          <label for="client">Klient</label>
-          <select
-              name="client"
-              id="client"
-              ng-model="client.selected"
-              ng-options="client.name for client in clients.data"
-              ng-change="setClient()"
-          ></select>
-        </div>
-        <div class="form-group">
-          <label for="vat">Stawka vat</label>
-          <select
-              name="vat"
-              id="vat"
-              ng-change="countBrutto()"
-              ng-model="vat"
-          >
-            <option value=23>23%</option>
-            <option value=5>5%</option>
-            <option value=8>8%</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="date">data</label>
-          <input
-              type="date"
-              id="date"
-              ng-model="fvDate"
-          >
-        </div>
-        <div class="form-group">
-          <label>Kwota</label>
-          <input
-              type="number"
-              ng-model="amount"
-              ng-change="countBrutto()"
-              min="0"
-          >
-        </div>
-
-        <input value="zapisz" type="submit"/>
-      </form>
-    </div>
-
-    <div class="col-md-3">
-      <h2>Podsumowanie</h2>
-      <p>Number fv {{fvNumber}}</p>
-      <p>Klient {{name}}</p>
-      <p>NIP {{nip}}</p>
-      <p>Data {{fvDate | date }}</p>
-      <p>Kwota {{amount | currency : "PLN"}}</p>
-      <p>Stawka vat {{vat }} %</p>
-      <p>Kwota brutto {{amountBrutto | currency : " PLN "}} </p>
-
-    </div>
-    <div class="col-md-3">
-      <h2>Dodaj klienta</h2>
-      <form ng-submit="saveClient()">
-        <div class="form-group">
-          <label>Client Name</label>
-          <input
-              ng-model="name"/>
-        </div>
-        <div class="form-group">
-          <label>Client NIP</label>
-          <input
-              ng-model="nip"/>
-        </div>
-        <h3>Adres</h3>
-        <hr>
-        <div class="form-group">
-          <label>Ulica</label>
-          <input
-              ng-model="addressStreet"/>
-        </div>
-        <div class="form-group">
-          <label for="nr">Numer </label>
-          <input
-              type="number"
-              id="nr"
-              ng-model="addressNr"/>
-        </div>
-        <div class="form-group">
-          <label>Miasto</label>
-          <input
-              ng-model="addressCity"
-          />
-        </div>
-        <div class="form-group">
-          <label for="postalcode">Kod</label>
-          <input
-              type="text"
-              id="postalcode"
-              ng-model="addressPostal">
-        </div>
-        <input type="submit"/>
-      </form>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-md-12">
-      <h2>Lista faktur</h2>
-      <div>
-        <table class="table">
-          <thead>
-          <th>Klient</th>
-          <th>NIP</th>
-          <th>Data</th>
-          <th>Kwota Netto</th>
-          <th>Numer FV</th>
-          <th>Stawka VAT</th>
-          <th>Kwota brutto</th>
-          </thead>
-          <tr ng-repeat="fv in fvs.data">
-            <td>{{fv.client }}</td>
-            <td>{{fv.fvNip}}</td>
-            <td>{{fv.fvDate | date}}</td>
-            <td>{{ fv.amount}}</td>
-            <td>{{fv.fvNumber}}</td>
-            <td>{{fv.vat}}</td>
-            <td ng-hide="fv.vat === undefined">{{fv.amount + (fv.amount * fv.vat / 100) }}</td>
-
-          </tr>
-        </table>
-      </div>
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Wystaw fv
+      </button>
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createClient">
+        Dodaj klienta
+      </button>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <h2>Lista klientów</h2>
-      <div>
-        <table class="table table-responsive">
-          <thead>
-          <th>Nazwa firmy</th>
-          <th>NIP</th>
-          <th>Miasto</th>
-          <th>Ulica</th>
-          <th>Kod </th>
+<div class="row">
+  <div class="col-md-3">
+    <h2>Podsumowanie</h2>
+    <p>Number fv {{fvNumber}}</p>
+    <p>Klient {{name}}</p>
+    <p>Ulica {{addressStreet}}</p>
+    <p>Miejscowość {{addressCity}}</p>
+    <p>Nr Domu {{addressNr}}</p>
+    <p>Kod Pocztowy {{addressPostal}}</p>
+    <!--todo - wyświetlić dane w podsumowaniu-->
+    <p>NIP {{nip}}</p>
+    <p>Data {{fvDate | date }}</p>
+    <p>Kwota {{amount | currency : "PLN"}}</p>
+    <p>Stawka vat {{vat }} %</p>
+    <p>Kwota brutto {{amountBrutto | currency : " PLN "}} </p>
 
-          </thead>
-          <tr ng-repeat="client in clients.data">
-            <td>{{client.name}}</td>
-            <td>{{client.nip}}</td>
-            <td>{{client.city}}</td>
-            <td>{{client.street}}</td>
-            <td>{{client.postal}}</td>
-          </tr>
-        </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h2>Lista faktur</h2>
+    <div>
+      <table class="table">
+        <thead>
+        <th>Klient</th>
+        <th>NIP</th>
+        <th>Data</th>
+        <th>Kwota Netto</th>
+        <th>Numer FV</th>
+        <th>Stawka VAT</th>
+        <th>Kwota brutto</th>
+        </thead>
+        <tr ng-repeat="fv in fvs.data">
+          <td>{{fv.client }}</td>
+          <td>{{fv.fvNip}}</td>
+          <td>{{fv.fvDate | date}}</td>
+          <td>{{ fv.amount}}</td>
+          <td>{{fv.fvNumber}}</td>
+          <td>{{fv.vat}}</td>
+          <td ng-hide="fv.vat === undefined">{{fv.amount + (fv.amount * fv.vat / 100) }}</td>
 
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <h2>Lista klientów</h2>
+    <div>
+      <table class="table table-responsive">
+        <thead>
+        <th>Nazwa firmy</th>
+        <th>NIP</th>
+        <th>Miasto</th>
+        <th>Ulica</th>
+        <th>Kod</th>
+
+        </thead>
+        <tr ng-repeat="client in clients.data">
+          <td>{{client.name}}</td>
+          <td>{{client.nip}}</td>
+          <td>{{client.city}}</td>
+          <td>{{client.street}}</td>
+          <td>{{client.postal}}</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="createClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="">Modal title</h4>
+      </div>
+      <div class="modal-body">
+  <div class="col-md-3">
+    <h2>Dodaj klienta</h2>
+    <form ng-submit="saveClient()">
+      <div class="form-group">
+        <label>Client Name</label>
+        <input
+            ng-model="name"/>
+      </div>
+      <div class="form-group">
+        <label>Client NIP</label>
+        <input
+            ng-model="nip"/>
+      </div>
+      <h3>Adres</h3>
+      <hr>
+      <div class="form-group">
+        <label>Ulica</label>
+        <input
+            ng-model="addressStreet"/>
+      </div>
+      <div class="form-group">
+        <label for="nr">Numer </label>
+        <input
+            type="number"
+            id="nr"
+            ng-model="addressNr"/>
+      </div>
+      <div class="form-group">
+        <label>Miasto</label>
+        <input
+            ng-model="addressCity"
+        />
+      </div>
+      <div class="form-group">
+        <label for="postalcode">Kod</label>
+        <input
+            type="text"
+            id="postalcode"
+            ng-model="addressPostal">
+      </div>
+      <input type="submit"/>
+    </form>
+  </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
 
-<script src="node_modules/angular/angular.js"></script>
-<script src="node_modules/angular-route/angular-route.js"></script>
-<script src="main.js"></script>
+        <div class="col-md-3">
+          <form
+              ng-submit="saveFV()"
+          >
+            <h2>Wystaw fv</h2>
+            <div>
+              <label for="fv-number">Faktura numer </label>
+              <input
+                  type="number"
+                  id="fv-number"
+                  ng-model="fvNumber"
+                  min="0"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="client">Klient</label>
+              <select
+                  name="client"
+                  id="client"
+                  ng-model="client.selected"
+                  ng-options="client.name for client in clients.data"
+                  ng-change="setClient()"
+              ></select>
+            </div>
+            <div class="form-group">
+              <label for="vat">Stawka vat</label>
+              <select
+                  name="vat"
+                  id="vat"
+                  ng-change="countBrutto()"
+                  ng-model="vat"
+              >
+                <option value=23>23%</option>
+                <option value=5>5%</option>
+                <option value=8>8%</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">data</label>
+              <input
+                  type="date"
+                  id="date"
+                  ng-model="fvDate"
+              >
+            </div>
+            <div class="form-group">
+              <label>Kwota</label>
+              <input
+                  type="number"
+                  ng-model="amount"
+                  ng-change="countBrutto()"
+                  min="0"
+              >
+            </div>
+
+            <input value="zapisz" type="submit"/>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="node_modules/angular/angular.js"></script>
+  <script src="node_modules/angular-route/angular-route.js"></script>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="main.js"></script>
 </div>
 </body>
 </html>
