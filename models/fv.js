@@ -4,6 +4,7 @@ var FV = db.model('FV', {
   client: {type: String, required: true},
   amount: {type: Number, required: true },
   vat: {type: Number, required: true},
-  fvNip: {type: Number, required: true}
+  fvNip: {type: Number, required: true},
+  fvDate: {type: Date , required: true}
 });
 module.exports = FV;

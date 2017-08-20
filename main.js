@@ -19,7 +19,8 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
         amount: $scope.amount,
         vat: $scope.vat,
         fvNumber: $scope.fvNumber,
-        fvNip: $scope.nip
+        fvNip: $scope.nip,
+        fvDate: $scope.fvDate
       })
         .then(function (fv) {
           //error

@@ -23,6 +23,7 @@
               type="number"
               id="fv-number"
               ng-model="fvNumber"
+              min="0"
           >
         </div>
 
@@ -49,12 +50,22 @@
             <option value=8>8%</option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="date">data</label>
+          <input
+              type="date"
+              id="date"
+              ng-model="fvDate"
+          >
+        </div>
         <div>
           <label>Kwota</label>
           <input
               type="number"
               ng-model="amount"
-              ng-change="countBrutto()">
+              ng-change="countBrutto()"
+              min="0"
+          >
         </div>
         <input value="zapisz" type="submit"/>
       </form>
@@ -65,6 +76,7 @@
       <p>Number fv {{fvNumber}}</p>
       <p>Klient {{name}}</p>
       <p>NIP {{nip}}</p>
+      <p>Data {{fvDate | date }}</p>
       <p>Kwota {{amount | currency : "PLN"}}</p>
       <p>Stawka vat {{vat }} %</p>
       <p>Kwota brutto {{amountBrutto | currency : " PLN "}} </p>
@@ -93,6 +105,7 @@
           <thead>
           <th>Klient</th>
           <th>NIP</th>
+          <th>Data</th>
           <th>Kwota Netto</th>
           <th>Numer FV</th>
           <th>Stawka VAT</th>
@@ -101,10 +114,12 @@
           <tr ng-repeat="fv in fvs.data">
             <td>{{fv.client }}</td>
             <td>{{fv.fvNip}}</td>
+            <td>{{fv.fvDate | date}}</td>
             <td>{{ fv.amount}}</td>
             <td>{{fv.fvNumber}}</td>
             <td>{{fv.vat}}</td>
             <td ng-hide="fv.vat === undefined">{{fv.amount + (fv.amount * fv.vat / 100) }}</td>
+
           </tr>
         </table>
       </div>

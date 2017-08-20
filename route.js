@@ -8,7 +8,8 @@ module.exports = function (app) {
       amount: req.body.amount,
       vat: req.body.vat,
       fvNumber: req.body.fvNumber,
-      fvNip: req.body.fvNip
+      fvNip: req.body.fvNip,
+      fvDate: req.body.fvDate
     });
     fv.save(function (err, fv) {
       if (err) { return next(err) }
