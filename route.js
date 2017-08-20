@@ -20,7 +20,11 @@ module.exports = function (app) {
   app.post('/api/clients', function (req, res, next) {
     var client = new Client({
       name: req.body.name,
-      nip: req.body.nip
+      nip: req.body.nip,
+      addressNr: req.body.addressNr,
+      addressCity: req.body.addressCity,
+      addressPostal: req.body.addressPostal,
+      addressStreet: req.body.addressStreet
     });
     client.save(function (err, post) {
       if (err) { return next(err) }

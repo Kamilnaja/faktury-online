@@ -6,11 +6,12 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
   $scope.countBrutto = function () {
     $scope.amountBrutto = $scope.amount + ($scope.amount * $scope.vat /1000 );
   };
-  // $scope.brutto = $scope.amount + ($scope.amount * $scope.vat /1000 );
+
   $scope.setClient = function () {
     $scope.nip = $scope.client.selected.nip;
     $scope.name = $scope.client.selected.name;
   };
+
   $scope.saveFV = function () {
     //save amount, nr kolejny i client do db
     if ($scope.client && $scope.amount) {
@@ -34,12 +35,17 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
     if ($scope.name && $scope.nip) {
       $http.post('/api/clients', {
         nip: $scope.nip,
-        name: $scope.name
+        name: $scope.name,
+        addressStreet: $scope.addressStreet,
+        addressNr: $scope.addressNr,
+        addressCity: $scope.addressCity,
+        addressPostal: $scope.addressPostal
+
       })
         .then(function (client) {
           //error
           $scope.clients.data.unshift(client);
-          console.log(client);
+          console.log("dodano klienta " + client);
         })
     } else {
       console.log("wpisz dane");
