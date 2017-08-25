@@ -1,13 +1,10 @@
-angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http) {
-  //default value
+angular.module('app', []).controller('fvCtrl', ['$scope', '$http', function ($scope, $http) {
   $scope.vat = 23;
   $scope.amount = 0;
-
   $scope.countBrutto = function () {
-    $scope.amountBrutto = $scope.amount + ($scope.amount * $scope.vat /1000 );
+    $scope.amountBrutto = $scope.amount + ($scope.amount * $scope.vat / 1000 );
   };
-
-  $scope.setClient = function () {
+    $scope.setClient = function () {
     $scope.nip = $scope.client.selected.nip;
     $scope.name = $scope.client.selected.name;
   };
@@ -61,4 +58,5 @@ angular.module('app', ['ngRoute']).controller('fvCtrl', function ($scope, $http)
     .then(function (fvs) {
       $scope.fvs = fvs
     })
-});
+  $scope.sortType = 'name';
+}]);

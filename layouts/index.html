@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Document</title>
 
 </head>
@@ -22,130 +23,190 @@
       </button>
     </div>
   </div>
-<div class="row">
-  <div class="col-md-3">
-    <h2>Podsumowanie</h2>
-    <p>Number fv {{fvNumber}}</p>
-    <p>Klient {{name}}</p>
-    <p>Ulica {{addressStreet}}</p>
-    <p>Miejscowość {{addressCity}}</p>
-    <p>Nr Domu {{addressNr}}</p>
-    <p>Kod Pocztowy {{addressPostal}}</p>
-    <!--todo - wyświetlić dane w podsumowaniu-->
-    <p>NIP {{nip}}</p>
-    <p>Data {{fvDate | date }}</p>
-    <p>Kwota {{amount | currency : "PLN"}}</p>
-    <p>Stawka vat {{vat }} %</p>
-    <p>Kwota brutto {{amountBrutto | currency : " PLN "}} </p>
-
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <h2>Lista faktur</h2>
-    <div>
-      <table class="table">
-        <thead>
-        <th>Klient</th>
-        <th>NIP</th>
-        <th>Data</th>
-        <th>Kwota Netto</th>
-        <th>Numer FV</th>
-        <th>Stawka VAT</th>
-        <th>Kwota brutto</th>
-        </thead>
-        <tr ng-repeat="fv in fvs.data">
-          <td>{{fv.client }}</td>
-          <td>{{fv.fvNip}}</td>
-          <td>{{fv.fvDate | date}}</td>
-          <td>{{ fv.amount}}</td>
-          <td>{{fv.fvNumber}}</td>
-          <td>{{fv.vat}}</td>
-          <td ng-hide="fv.vat === undefined">{{fv.amount + (fv.amount * fv.vat / 100) }}</td>
-
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6">
-    <h2>Lista klientów</h2>
-    <div>
-      <table class="table table-responsive">
-        <thead>
-        <th>Nazwa firmy</th>
-        <th>NIP</th>
-        <th>Miasto</th>
-        <th>Ulica</th>
-        <th>Kod</th>
-
-        </thead>
-        <tr ng-repeat="client in clients.data">
-          <td>{{client.name}}</td>
-          <td>{{client.nip}}</td>
-          <td>{{client.city}}</td>
-          <td>{{client.street}}</td>
-          <td>{{client.postal}}</td>
-        </tr>
-      </table>
+  <div class="row">
+    <div class="col-md-3">
+      <h2>Podsumowanie</h2>
+      <p>Number fv {{fvNumber}}</p>
+      <p>Klient {{name}}</p>
+      <p>Ulica {{addressStreet}}</p>
+      <p>Miejscowość {{addressCity}}</p>
+      <p>Nr Domu {{addressNr}}</p>
+      <p>Kod Pocztowy {{addressPostal}}</p>
+      <!--todo - wyświetlić dane w podsumowaniu-->
+      <p>NIP {{nip}}</p>
+      <p>Data {{fvDate | date }}</p>
+      <p>Kwota {{amount | currency : "PLN"}}</p>
+      <p>Stawka vat {{vat }} %</p>
+      <p>Kwota brutto {{amountBrutto | currency : " PLN "}} </p>
 
     </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Lista faktur</h2>
+      <div>
+        <table class="table">
+          <thead>
+          <th>Klient</th>
+          <th>NIP</th>
+          <th>Data</th>
+          <th>Kwota Netto</th>
+          <th>Numer FV</th>
+          <th>Stawka VAT</th>
+          <th>Kwota brutto</th>
+          </thead>
+          <tr ng-repeat="fv in fvs.data">
+            <td>{{fv.client }}</td>
+            <td>{{fv.fvNip}}</td>
+            <td>{{fv.fvDate | date}}</td>
+            <td>{{ fv.amount}}</td>
+            <td>{{fv.fvNumber}}</td>
+            <td>{{fv.vat}}</td>
+            <td ng-hide="fv.vat === undefined">{{fv.amount + (fv.amount * fv.vat / 100) }}</td>
+
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Lista klientów</h2>
+      <div>
+        <table class="table table-responsive">
+          <thead>
+          <th>
+            <a
+                href=""
+                ng-click="sortType='name'"
+            >Nazwa firmy</a>
+            <span
+                ng-show="sortType=='name'"
+                class="fa fa-caret-down"
+            >
+            </span>
+          </th>
+          <th>
+            <a
+                href=""
+                ng-click="sortType='nip'"
+            >NIP</a>
+            <span
+                ng-show="sortType=='nip'"
+                class="fa fa-caret-down"
+            ></span>
+          </th>
+          <th>
+            <a
+                href=""
+                ng-click="sortType='addressCity'"
+            >
+              Miasto
+              <span
+                  ng-show="sortType=='addressCity'"
+                  class="fa fa-caret-down"
+
+              >
+              </span>
+            </a>
+          </th>
+          <th>
+            <a
+                href=""
+                ng-click="sortType='addressStreet'"
+            >Ulica</a>
+            <span
+                class="fa fa-caret-down"
+                ng-show="sortType=='addressStreet'"
+            ></span>
+          </th>
+          <th>
+            <a href=""
+               ng-click="sortType='addressNr'">Numer</a>
+            <span
+                class="fa fa-caret-down"
+                ng-show="sortType=='addressNr'"
+            ></span>
+          </th>
+          <th>
+            <a href=""
+               ng-click="sortType='addressPostal'"
+            >Kod</a>
+            <span
+                class="fa fa-caret-down"
+                ng-show="sortType=='addressPostal'"
+            >
+          </span>
+          </th>
+
+          </thead>
+          <tr ng-repeat="client in clients.data | orderBy:sortType:sortReverse">
+            <td>{{client.name}}</td>
+            <td>{{client.nip}}</td>
+            <td>{{client.addressCity}}</td>
+            <td>{{client.addressStreet}}</td>
+            <td>{{client.addressNr}}</td>
+            <td>{{client.addressPostal}}</td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id="createClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="">Modal title</h4>
       </div>
       <div class="modal-body">
-  <div class="col-md-3">
-    <h2>Dodaj klienta</h2>
-    <form ng-submit="saveClient()">
-      <div class="form-group">
-        <label>Client Name</label>
-        <input
-            ng-model="name"/>
-      </div>
-      <div class="form-group">
-        <label>Client NIP</label>
-        <input
-            ng-model="nip"/>
-      </div>
-      <h3>Adres</h3>
-      <hr>
-      <div class="form-group">
-        <label>Ulica</label>
-        <input
-            ng-model="addressStreet"/>
-      </div>
-      <div class="form-group">
-        <label for="nr">Numer </label>
-        <input
-            type="number"
-            id="nr"
-            ng-model="addressNr"/>
-      </div>
-      <div class="form-group">
-        <label>Miasto</label>
-        <input
-            ng-model="addressCity"
-        />
-      </div>
-      <div class="form-group">
-        <label for="postalcode">Kod</label>
-        <input
-            type="text"
-            id="postalcode"
-            ng-model="addressPostal">
-      </div>
-      <input type="submit"/>
-    </form>
-  </div>
+        <div class="col-md-3">
+          <h2>Dodaj klienta</h2>
+          <form ng-submit="saveClient()">
+            <div class="form-group">
+              <label>Client Name</label>
+              <input
+                  ng-model="name"/>
+            </div>
+            <div class="form-group">
+              <label>Client NIP</label>
+              <input
+                  ng-model="nip"/>
+            </div>
+            <h3>Adres</h3>
+            <hr>
+            <div class="form-group">
+              <label>Ulica</label>
+              <input
+                  ng-model="addressStreet"/>
+            </div>
+            <div class="form-group">
+              <label for="nr">Numer </label>
+              <input
+                  type="number"
+                  id="nr"
+                  ng-model="addressNr"/>
+            </div>
+            <div class="form-group">
+              <label>Miasto</label>
+              <input
+                  ng-model="addressCity"
+              />
+            </div>
+            <div class="form-group">
+              <label for="postalcode">Kod</label>
+              <input
+                  type="text"
+                  id="postalcode"
+                  ng-model="addressPostal">
+            </div>
+            <input type="submit"/>
+          </form>
+        </div>
 
       </div>
       <div class="modal-footer">
@@ -238,7 +299,8 @@
   <script src="node_modules/angular-route/angular-route.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="assets/main.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/controller.js"></script>
 </div>
 </body>
 </html>
