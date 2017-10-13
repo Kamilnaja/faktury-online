@@ -5,7 +5,7 @@ angular.module('app', []).controller('fvCtrl', ['$scope', '$http', function ($sc
   $scope.countBrutto = function () {
     $scope.amountBrutto = $scope.amount + ($scope.amount * $scope.vat / 1000 );
   };
-  
+
     $scope.setClient = function () {
     $scope.nip = $scope.client.selected.nip;
     $scope.name = $scope.client.selected.name;

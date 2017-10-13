@@ -4,40 +4,50 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
               aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="">Modal title</h4>
+          <h4 class="modal-title" id="">
+            Dodaj klienta
+          </h4>
         </div>
         <div class="modal-body">
-          <div class="col-md-3">
-            <h2>Dodaj klienta</h2>
-            <form ng-submit="saveClient()">
+          <div>
+            <form>
               <div class="form-group">
                 <label>Client Name</label>
                 <input
-                    ng-model="name"/>
+                    ng-model="name"/
+                    class="form-control"
+                    >
               </div>
               <div class="form-group">
                 <label>Client NIP</label>
                 <input
-                    ng-model="nip"/>
+                    ng-model="nip"
+                    class="form-control"                    
+                    />
               </div>
               <h3>Adres</h3>
               <hr>
               <div class="form-group">
                 <label>Ulica</label>
                 <input
-                    ng-model="addressStreet"/>
+                    ng-model="addressStreet"
+                    class="form-control"
+                    />
               </div>
               <div class="form-group">
                 <label for="nr">Numer </label>
                 <input
                     type="number"
                     id="nr"
-                    ng-model="addressNr"/>
+                    ng-model="addressNr"
+                    class="form-control"
+                    />
               </div>
               <div class="form-group">
                 <label>Miasto</label>
                 <input
                     ng-model="addressCity"
+                    class="form-control"
                 />
               </div>
               <div class="form-group">
@@ -45,16 +55,30 @@
                 <input
                     type="text"
                     id="postalcode"
-                    ng-model="addressPostal">
+                    ng-model="addressPostal"
+                    class="form-control"
+                    >
               </div>
-              <input type="submit"/>
             </form>
           </div>
   
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button 
+            type="button" 
+            class="btn btn-default" 
+            data-dismiss="modal"
+          >
+          Close
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-primary" 
+            ng-click="saveClient()"
+            data-dismiss="modal"
+            >
+              Save changes
+            </button>
         </div>
       </div>
     </div>
