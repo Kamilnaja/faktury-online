@@ -9,8 +9,6 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 var routes = require('./route')(app);
 
-
-
 //zwraca wszystkie fv
 
 app.get('/', function (req, res){

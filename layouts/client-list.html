@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2>Lista klientów</h2>
+    <div>
+      <table class="table table-responsive">
+        <thead>
+        <th>
+          <a
+              href=""
+              ng-click="sortType='name'"
+          >Nazwa firmy</a>
+          <span
+              ng-show="sortType=='name'"
+              class="fa fa-caret-down"
+          >
+          </span>
+        </th>
+        <th>
+          <a
+              href=""
+              ng-click="sortType='nip'"
+          >NIP</a>
+          <span
+              ng-show="sortType=='nip'"
+              class="fa fa-caret-down"
+          ></span>
+        </th>
+        <th>
+          <a
+              href=""
+              ng-click="sortType='addressCity'"
+          >
+            Miasto
+            <span
+                ng-show="sortType=='addressCity'"
+                class="fa fa-caret-down"
+
+            >
+            </span>
+          </a>
+        </th>
+        <th>
+          <a
+              href=""
+              ng-click="sortType='addressStreet'"
+          >Ulica</a>
+          <span
+              class="fa fa-caret-down"
+              ng-show="sortType=='addressStreet'"
+          ></span>
+        </th>
+        <th>
+          <a href=""
+             ng-click="sortType='addressNr'">Numer</a>
+          <span
+              class="fa fa-caret-down"
+              ng-show="sortType=='addressNr'"
+          ></span>
+        </th>
+        <th>
+          <a href=""
+             ng-click="sortType='addressPostal'"
+          >Kod</a>
+          <span
+              class="fa fa-caret-down"
+              ng-show="sortType=='addressPostal'"
+          >
+        </span>
+        </th>
+
+        </thead>
+        <tr ng-repeat="client in clients.data | orderBy:sortType:sortReverse">
+          <td>{{client.name}}</td>
+          <td>{{client.nip}}</td>
+          <td>{{client.addressCity}}</td>
+          <td>{{client.addressStreet}}</td>
+          <td>{{client.addressNr}}</td>
+          <td>{{client.addressPostal}}</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>
